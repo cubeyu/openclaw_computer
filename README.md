@@ -3,7 +3,7 @@
 一个预装 OpenClaw 并具有桌面环境的 Linux 容器，适配 ModelScope、HuggingFace 等免费容器部署服务，通过浏览器即可畅玩体验 OpenClaw
 
 ## 通过本项目，你将获得：
-- 💻 一台硬件配置至少为双核CPU/16GB内存的 Linux 主机（由 ModelScope/HuggingFace 免费提供）
+- 💻 一台硬件配置至少为2核/16GB内存的 Linux 云电脑（由 ModelScope/HuggingFace 免费提供）
 - ✨ 具有类 Windows 桌面的系统操作环境，预装 Chrome 浏览器 / 中文拼音输入法，轻松易上手
 - 🚀 开箱即用的 OpenClaw，默认配置 ModelScope 模型推理后端（免费），提供密钥即可畅玩
 
