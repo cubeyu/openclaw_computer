@@ -33,7 +33,8 @@ docker run -d \
 
 ## 帮助信息
 
-- **输入法切换**：按 `Ctrl+Shift` 组合键切换中英文输入法
+- 支持自定义启动脚本（目前仅限 ModelScope），相关代码需写在 `/root/bz-startup/main.sh` 文件中
+- 按 `Ctrl+Shift` 组合键切换中英文输入法
 - 启动后屏幕左侧工具栏可调出剪贴板，可在上面输入或粘贴文字，然后在容器内可以直接粘贴
 
 ## 更新日志
@@ -50,5 +51,10 @@ docker run -d \
 1. 将 npm 仓库官方源更改为国内源（registry.npmmirror.com），npm 下载安装模块速度可拉满
 2. OpenClaw 升级到最新的 2026.3.8 版本
 3. 进一步压缩减小了镜像体积
+
+#### 2026-03-10
+1. 新增支持自定义启动脚本，便于在容器休眠/重启后自动恢复指定进程，相关脚本代码需写在 `/root/bz-startup/main.sh` 文件中。
+2. 新增支持 ModelScope 容器自动实时备份/重启后自动恢复的路径：`/root/bz-startup`, `/root/.codex`, `/root/.claude`
+3. 修复 ModelScope 用户名称加上创空间英文名称长度超过27个字符时可能导致 OpenClaw 启动失败的问题。
 
 Made with ❤️ by 百泽匠人
