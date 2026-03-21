@@ -30,7 +30,7 @@ docker run -d \
 ## 容器特性介绍
 1. 容器支持自动备份/恢复 OpenClaw 配置及部分预定义文件夹，具体包括：OpenClaw 配置目录（`/root/.openclaw`）、电脑桌面目录（`/root/Desktop`）、Codex 配置目录（`/root/.codex`）、Claude Code 配置目录（`/root/.claude`）、用户自定义启动脚本目录（`/root/bz-startup`）、zsh 历史记录文件（`/root/.zsh_history`）
     1. 在 ModelScope 部署时，容器默认启用自动备份/恢复特性，相关备份内容会实时自动同步到 `/mnt/workspace` 目录下（该路径是 ModelScope 特供的持久化储存目录），容器重启时自动从此目录下读取并恢复相关备份文件。但需要注意，同一账号下的不同创空间的 `/mnt/workspace` 目录内容并不相通，所以自动备份/恢复功能的应用范围仅限该创空间自身。
-    2. 容器还提供利用 **S3 远程储存** 的通用自动备份/恢复特性，使得在 ModelScope、HuggingFace 或本地部署时 OpenClaw 的配置均能无缝同步衔接，使用该特性时需要设置 `S3_XXX` 相关环境变量，具体见下文的环境变量配置。如果你还没有 S3 远程储存空间，推荐使用中国科学院提供的一项云存储服务「数据胶囊」（[https://data.cstcloud.cn](https://data.cstcloud.cn)）,实名认证后即可获得一个 20GB 的免费储存空间，并支持 S3/WebDAV 协议的访问。
+    2. 容器还提供利用 **S3 远程储存** 的通用自动备份/恢复特性，实现在 ModelScope、HuggingFace 或本地部署时 OpenClaw 的配置均能无缝同步衔接，使用该特性时需要设置 `S3_XXX` 相关环境变量，具体见下文的环境变量配置。如果你还没有 S3 远程储存空间，推荐使用中国科学院提供的一项云存储服务「数据胶囊」（[https://data.cstcloud.cn](https://data.cstcloud.cn)）,实名认证后即可获得一个 20GB 的免费储存空间，并支持 S3/WebDAV 协议的访问。
 2. 容器支持自定义启动脚本，便于在重启时拉起/配置相关服务，相关脚本代码需写在 `/root/bz-startup/main.sh` 文件中
 
 ## 环境变量配置
