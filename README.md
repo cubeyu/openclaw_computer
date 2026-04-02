@@ -53,26 +53,28 @@ docker run -d \
 | 变量名 | 必填 | 默认值 | 说明 |
 |--------|------|--------|------|
 | `SKIP_RESTORE` | 否 | `0` | 当该值设置为 `1` 时，容器将以纯净模式启动。在此模式下，容器启动时不会自动恢复 OpenClaw 历史配置、不会启用相关目录的自动备份功能以及停止执行用户自定义的启动脚本 |
-| `VNC_PASSWD` | 否 | `空值` | VNC连接密码，当该值被设置时，容器启动后需要输入此密码才能进入桌面 |
+| `VNC_PASSWD` | 否 | `无` | VNC连接密码，当该值被设置时，容器启动后需要输入此密码才能进入桌面 |
 
 ### 通用自动备份/恢复配置
 #### S3 远程存储
 | 变量名 | 必填 | 默认值 | 说明 |
 |--------|------|--------|------|
-| `S3_BUCKET` | 否 | `空值` | S3 远程存储的桶名 Bucket。当该值非空时，容器将启用 S3 远程存储的通用自动备份/恢复特性 |
-| `S3_KEY_ID` | 否 | `空值` | S3 远程存储的 AccessKey ID |
-| `S3_ACCESS_KEY` | 否 | `空值` | S3 远程存储的 AccessKey Secret |
+| `S3_BUCKET` | 否 | `无` | S3 远程存储的桶名 Bucket。当该值非空时，容器将启用 S3 远程存储的通用自动备份/恢复特性 |
+| `S3_KEY_ID` | 否 | `无` | S3 远程存储的 AccessKey ID |
+| `S3_ACCESS_KEY` | 否 | `无` | S3 远程存储的 AccessKey Secret |
 | `S3_ENDPOINT` | 否 | `https://s3.cstcloud.cn` | S3 远程存储的接入点 Endpoint，默认值是中国科技院[「数据胶囊」](https://data.cstcloud.cn)服务的 S3 协议接入点 |
 | `S3_BACKUP_PATH` | 否 | `backups/data.tar.gz` | S3 远程存储的备份路径，设置不同备份路径可以区分备份版本，并选择从指定备份版本中恢复配置。例如，可设置：`backups/data_version_1.tar.gz`、`user1/data.tar.gz`、`user2/data.tar.gz` |
+| `BACKUP_ENC_PASS` | 否 | `无` | 备份文件加密密码，当该值被设置时，备份文件传输到远程网络存储前会先被加密，实现端到端加密（E2E）效果 |
 
 #### WebDAV 远程存储
 | 变量名 | 必填 | 默认值 | 说明 |
 |--------|------|--------|------|
-| `WEBDAV_URL` | 否 | `空值` | WebDAV 服务地址。当该值非空时，容器将启用 WebDAV 远程存储的通用自动备份/恢复特性 |
-| `WEBDAV_USER` | 否 | `空值` | WebDAV 服务用户名 |
-| `WEBDAV_PASSWD` | 否 | `空值` | WebDAV 服务密码 |
+| `WEBDAV_URL` | 否 | `无` | WebDAV 服务地址。当该值非空时，容器将启用 WebDAV 远程存储的通用自动备份/恢复特性 |
+| `WEBDAV_USER` | 否 | `无` | WebDAV 服务用户名 |
+| `WEBDAV_PASSWD` | 否 | `无` | WebDAV 服务密码 |
 | `WEBDAV_CLIENT_UA` | 否 | `Zotero/8.0` | 连接 WebDAV 服务的 UA 标头，默认值是中国科技院[「数据胶囊」](https://data.cstcloud.cn)服务限定允许接入的客户端 UA 标头 |
 | `WEBDAV_BACKUP_PATH` | 否 | `backups/data.tar.gz` | WebDAV 远程存储的备份路径，设置不同备份路径可以区分备份版本，并选择从指定备份版本中恢复配置。例如，可设置：`backups/data_version_1.tar.gz`、`user1/data.tar.gz`、`user2/data.tar.gz` |
+| `BACKUP_ENC_PASS` | 否 | `无` | 备份文件加密密码，当该值被设置时，备份文件传输到远程网络存储前会先被加密，实现端到端加密（E2E）效果 |
 
 
 ## 使用技巧
@@ -91,6 +93,11 @@ docker run -d \
 ## 更新日志
 
 **升级操作说明**：ModelScope 已经部署容器的用户，需要在创空间“设置”处点击“深度重启”，然后才会自动拉取最新的容器镜像并部署。
+
+#### 2026-04-02
+1. 通过远程网络存储备份时，支持 E2E 加密功能，通过设置 `BACKUP_ENC_PASS` 环境变量开启
+2. OpenClaw 升级至最新 2026.4.1 版本
+3. CoPaw 版：升级至最新 1.0.0.post3 版本
 
 #### 2026-04-01
 1. OpenClaw 升级至最新 2026.3.31 版本
