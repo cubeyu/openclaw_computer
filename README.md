@@ -89,6 +89,22 @@ docker run -d \
 设置环境变量 `SKIP_RESTORE=1`，此时容器将以纯净模式启动，不会自动恢复 OpenClaw 历史配置、不会启用相关目录的自动备份功能以及停止执行用户自定义的启动脚本。
 3. **为什么 ModelScope（国际版）选择深度重启后镜像还是旧的版本？**  
 这似乎是国际版的 bug，需要删除创空间后重新创建，才会拉取最新的容器镜像。
+4. **如何设置自动备份/恢复 Chrome 浏览器的书签、浏览历史等数据？**  
+由于浏览器数据占用空间比较大，备份及远程传输时可能会很慢，所以没有列为默认备份/恢复目录。但可以通过自定义启动脚本的功能，实现浏览器数据的备份/恢复。以 ModelScope 部署为例，修改脚本文件（/root/bz-startup/main.sh），使其内容如下即可：  
+    ```bash
+    #!/bin/bash
+    
+    # 恢复 Chrome 历史数据
+    rsync -a "/mnt/workspace/chrome/" "/root/.config/google-chrome/Default/"
+    
+    # 每 10 分钟备份一次 Chrome 数据
+    nohup bash -c '
+    while true; do
+        rsync -a --delete "/root/.config/google-chrome/Default/" "/mnt/workspace/chrome/"
+        sleep 600
+    done
+    ' > /dev/null 2>&1 &
+    ```
 
 ## 更新日志
 
