@@ -123,6 +123,7 @@ docker run -d \
 
 #### 2026-04-13
 1. 新增 QwenPaw 镜像版本，docker tag 标识为 `qwenpaw_latest`（备注：官方已将 CoPaw 正式更名为 QwenPaw）
+2. 优化 Hermes 版镜像，自动备份时忽略 node_modules 文件夹
 
 #### 2026-04-12
 1. 新增 Hermes 镜像版本，docker tag 标识为 `hermes_latest`
