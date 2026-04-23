@@ -25,8 +25,8 @@
 #### HuggingFace 部署教程：
 - 在 Spaces 仓库目录下添加 Dockerfile 文件，内容和本仓库中的文件一致，然后在“设置”中添加 `ROOT_PASSWD` 和 `MODELSCOPE_API_KEY` 两个环境变量，最后点击重启容器即可开始部署。
 - 将 Bucket 挂载在 `/mnt/workspace` 路径下可激活本地自动备份/恢复特性
-- > 📌 注意：HuggingFace 好像已不允许在免费硬件（CPU basic, 2vCPU 16GB RAM）的容器上部署 OpenClaw，当检测到容器内存在 OpenClaw 进程时会自动暂停容器，也无法重新启动容器（会出现 503 错误），预计需要切换至付费硬件（CPU upgrade, 8 vCPU 32GB RAM）才能继续使用。  
-  > 目前仅旧版 CoPaw 版镜像仍可以在 HF 的免费容器上部署，需将 Dockerfile 的首行代码改为 `FROM ghcr.io/tunmax/openclaw_computer:copaw_latest` 即可
+- > 📌 注意：HuggingFace 似乎已不允许在免费硬件（CPU basic, 2vCPU 16GB RAM）的容器上部署 OpenClaw，当检测到容器内存在 OpenClaw 进程时会自动暂停容器，也无法重新启动容器（会出现 503 错误），预计需要切换至付费硬件（CPU upgrade, 8 vCPU 32GB RAM）才能继续使用。  
+  > 目前仅旧版 CoPaw 版镜像仍可以在 HF 的免费容器上部署，需将 Dockerfile 的首行代码改为 `FROM ghcr.io/tunmax/openclaw_computer:copaw_latest` 
 
 #### ⚠️ 重要提醒
 在开源社区部署本容器时，请勿启动内网穿透相关服务，根据有关反馈和真实案例，HuggingFace Spaces 具备检测容器内是否运行内网穿透服务的能力，一旦检测到此类情况，容器将会被立即删除，相关账号也会面临被封禁的风险。对于 ModelScope Spaces 也请勿运行内网穿透相关服务。本容器仅用于 OpenClaw 的体验。
@@ -120,6 +120,10 @@ docker run -d \
 ## 更新日志
 
 **升级操作说明**：ModelScope 已经部署容器的用户，需要在创空间“设置”处点击“深度重启”，然后才会自动拉取最新的容器镜像并部署。
+
+#### 2026-04-23
+1. OpenClaw 升级至最新 2026.4.21 版本
+2. Chrome 浏览器升级至最新 147.0.7727.116 版本
 
 #### 2026-04-22
 1. OpenClaw 升级至最新 2026.4.20 版本
